@@ -171,6 +171,28 @@ public class SurvivalGames extends JavaPlugin {
     		}
     		else
     		{
+    			if(sender instanceof Player)
+    			{
+    				Player player = (Player) sender;
+    				if(player.isOp())
+    				{
+    					player.setGameMode(GameMode.CREATIVE);
+    	    			if(spectators == null)
+    	    			{
+    	    				spectators = new LinkedList<String>();
+    	    			}
+    	    			spectators.add(player.getName());
+    	    			for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
+    	    			{
+    	    				Player plyr = getServer().getOnlinePlayers()[i];
+    	    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
+    	    				{
+    	    					plyr.hidePlayer(player);
+    	    				}
+    	    			}
+    	    			return true;
+    				}
+    			}
     			sender.sendMessage(ChatColor.RED + "You can't use that command now");
     			return true;
     		}

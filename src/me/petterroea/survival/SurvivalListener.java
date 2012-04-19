@@ -27,7 +27,32 @@ public class SurvivalListener implements Listener{
 	{
 		if(SurvivalGames.started && !event.getPlayer().isOp())
 		{
-			event.getPlayer().kickPlayer("The round has allready started");
+			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
+			{
+				event.getPlayer().setGameMode(GameMode.CREATIVE);
+				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+				{
+					games.getServer().getOnlinePlayers()[i].hidePlayer(event.getPlayer());
+				}
+			}
+			else
+			{
+	    			Player player = (Player) event.getPlayer();
+	    			player.setGameMode(GameMode.CREATIVE);
+	    			if(games.spectators == null)
+	    			{
+	    				games.spectators = new LinkedList<String>();
+	    			}
+	    			games.spectators.add(player.getName());
+	    			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+	    			{
+	    				Player plyr = games.getServer().getOnlinePlayers()[i];
+	    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
+	    				{
+	    					plyr.hidePlayer(player);
+	    				}
+	    			}
+			}
 		}
 		if(open || event.getPlayer().isOp())
 		{
