@@ -1,0 +1,16 @@
+name: SurvivalGames
+main: me.petterroea.survival.SurvivalGames
+version: 0.01
+commands:
+    start:
+        desc: 'Starts the game! You need at least 2 players to do this'
+        usage: 'Usage: /start'
+    spectate:
+        desc: 'Puts you in spectate mode. You have to do this before a game'
+        usage: 'Usage: /spectate'
+    dontstart:
+        desc: 'Stops a game from starting'
+        usage: 'Usage: /dontstart'
+    tpto:
+        desc: 'Teleports a spectator to a player'
+        usage: 'Usage: /tpto <PLAYER>'
