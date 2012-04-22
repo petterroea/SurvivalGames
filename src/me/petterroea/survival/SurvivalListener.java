@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,32 +28,33 @@ public class SurvivalListener implements Listener{
 	{
 		if(SurvivalGames.started && !event.getPlayer().isOp())
 		{
-			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
-			{
-				event.getPlayer().setGameMode(GameMode.CREATIVE);
-				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-				{
-					games.getServer().getOnlinePlayers()[i].hidePlayer(event.getPlayer());
-				}
-			}
-			else
-			{
-	    			Player player = (Player) event.getPlayer();
-	    			player.setGameMode(GameMode.CREATIVE);
-	    			if(games.spectators == null)
-	    			{
-	    				games.spectators = new LinkedList<String>();
-	    			}
-	    			games.spectators.add(player.getName());
-	    			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-	    			{
-	    				Player plyr = games.getServer().getOnlinePlayers()[i];
-	    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
-	    				{
-	    					plyr.hidePlayer(player);
-	    				}
-	    			}
-			}
+			event.getPlayer().kickPlayer("A game is allready in action!");
+//			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
+//			{
+//				event.getPlayer().setGameMode(GameMode.CREATIVE);
+//				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+//				{
+//					games.getServer().getOnlinePlayers()[i].hidePlayer(event.getPlayer());
+//				}
+//			}
+//			else
+//			{
+//	    			Player player = (Player) event.getPlayer();
+//	    			player.setGameMode(GameMode.CREATIVE);
+//	    			if(games.spectators == null)
+//	    			{
+//	    				games.spectators = new LinkedList<String>();
+//	    			}
+//	    			games.spectators.add(player.getName());
+//	    			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+//	    			{
+//	    				Player plyr = games.getServer().getOnlinePlayers()[i];
+//	    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
+//	    				{
+//	    					plyr.hidePlayer(player);
+//	    				}
+//	    			}
+//			}
 		}
 		if(open || event.getPlayer().isOp())
 		{
@@ -61,26 +63,28 @@ public class SurvivalListener implements Listener{
 			event.getPlayer().sendMessage(ChatColor.GREEN + "1. Tributes may not break other blocks then leaves and mushrooms");
 			event.getPlayer().sendMessage(ChatColor.GREEN + "2. You have to wait 3 minutes before you can kill anyone");
 			event.getPlayer().sendMessage(ChatColor.GREEN + "3. You can only place blocks you have found in a chest");
-			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
-			{
-				event.getPlayer().setGameMode(GameMode.CREATIVE);
-				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-				{
-					games.getServer().getOnlinePlayers()[i].hidePlayer(event.getPlayer());
-				}
-			}
-			else
+//			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
+//			{
+//				event.getPlayer().setGameMode(GameMode.CREATIVE);
+//				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+//				{
+//					games.getServer().getOnlinePlayers()[i].hidePlayer(event.getPlayer());
+//				}
+//			}
+//			else
 			{
 				event.getPlayer().setGameMode(GameMode.SURVIVAL);
-				for(int i = 0; i < games.spectators.size(); i++)
-				{
-					Player toHide = games.getServer().getPlayer(games.spectators.get(i));
-					if(toHide != null)
-					{
-						event.getPlayer().hidePlayer(toHide);
-					}
-				}
+//				for(int i = 0; i < games.spectators.size(); i++)
+//				{
+//					Player toHide = games.getServer().getPlayer(games.spectators.get(i));
+//					if(toHide != null)
+//					{
+//						event.getPlayer().hidePlayer(toHide);
+//					}
+//				}
 			}
+			event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1578, 60, -627));
+	
 		}
 		else
 		{
@@ -151,43 +155,44 @@ public class SurvivalListener implements Listener{
 		if(event.getEntity() instanceof Player)
 		{
 			Player player = (Player) event.getEntity();
-			player.setGameMode(GameMode.CREATIVE);
-			if(SurvivalGames.spectators == null)
-			{
-				SurvivalGames.spectators = new LinkedList<String>();
-			}
-			SurvivalGames.spectators.add(player.getName());
-			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-			{
-				Player plyr = games.getServer().getOnlinePlayers()[i];
-				if(!plyr.getName().equalsIgnoreCase(player.getName()))
-				{
-					plyr.hidePlayer(player);
-				}
-			}
-			int aliveplayers = 0;
-			String lastName = "ANON";
-			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-			{
-				if(!games.getServer().getOnlinePlayers()[i].getName().equals(player.getName()))
-				{
-					if(!isSpectator(games.getServer().getOnlinePlayers()[i].getName()))
-					{
-						aliveplayers++;
-						lastName = games.getServer().getOnlinePlayers()[i].getName();
-					}
-				}
-			}
-			if(aliveplayers == 1)
-			{
-				games.getServer().broadcastMessage(ChatColor.RED + lastName + " has won the game! The game will reset in 60 seconds...");
-				games.getServer().getScheduler().scheduleSyncDelayedTask(games, new Runnable() {
-
-					   public void run() {
-						   games.getServer().shutdown();
-					   }
-					}, 1200L);
-			}
+//			player.setGameMode(GameMode.CREATIVE);
+//			if(SurvivalGames.spectators == null)
+//			{
+//				SurvivalGames.spectators = new LinkedList<String>();
+//			}
+//			SurvivalGames.spectators.add(player.getName());
+//			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+//			{
+//				Player plyr = games.getServer().getOnlinePlayers()[i];
+//				if(!plyr.getName().equalsIgnoreCase(player.getName()))
+//				{
+//					plyr.hidePlayer(player);
+//				}
+//			}
+//			int aliveplayers = 0;
+//			String lastName = "ANON";
+//			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+//			{
+//				if(!games.getServer().getOnlinePlayers()[i].getName().equals(player.getName()))
+//				{
+//					if(!isSpectator(games.getServer().getOnlinePlayers()[i].getName()))
+//					{
+//						aliveplayers++;
+//						lastName = games.getServer().getOnlinePlayers()[i].getName();
+//					}
+//				}
+//			}
+//			if(aliveplayers == 1)
+//			{
+//				games.getServer().broadcastMessage(ChatColor.RED + lastName + " has won the game! The game will reset in 60 seconds...");
+//				games.getServer().getScheduler().scheduleSyncDelayedTask(games, new Runnable() {
+//
+//					   public void run() {
+//						   games.getServer().shutdown();
+//					   }
+//					}, 1200L);
+//			}
+			player.kickPlayer("You are dead!");
 		}
 	}
 	public boolean isSpectator(String name)

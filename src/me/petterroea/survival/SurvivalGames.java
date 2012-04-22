@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,6 +25,64 @@ public class SurvivalGames extends JavaPlugin {
 			}, 5L);
         
         spectators = new LinkedList<String>();
+        Block b;
+        b = getServer().getWorld("world").getBlockAt(-1577, 60, -608);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1579, 60, -609);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1580, 60, -611);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1579, 60, -613);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1577, 60, -614);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1575, 60, -613);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1574, 60, -614);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1575, 60, -609);
+        b.setTypeId(7);
+        
+        
+        
+        
+        //entrance to admin hole
+        
+        b = getServer().getWorld("world").getBlockAt(-1574, 79, -646);
+        b.setTypeId(7);
+
+        b = getServer().getWorld("world").getBlockAt(-1574, 60, -646);
+        b.setTypeId(7);
+        
+        
+        
+        
+        
+        b = this.getServer().getWorld("world").getBlockAt(-1571, 66, -645);
+        b.setTypeId(7);
+
+        b = this.getServer().getWorld("world").getBlockAt(-1572, 66, -645);
+        b.setTypeId(7);
+        
+        
+        
+        b = this.getServer().getWorld("world").getBlockAt(-1574, 72, -645);
+        b.setTypeId(0);
+
+        b = this.getServer().getWorld("world").getBlockAt(-1574, 71, -645);
+        b.setTypeId(0);
+        
+        
+        
+        b = this.getServer().getWorld("world").getBlockAt(-1574, 71, -645);
+        b.setTypeId(0);
     }
      
     public void onDisable(){ 
@@ -97,6 +156,43 @@ public class SurvivalGames extends JavaPlugin {
             									   getServer().broadcastMessage(ChatColor.RED + "The game has started!");
             									   started = true;
             								   }
+        									   Block b;
+        								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -607-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -608-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1579-1, 60, -610-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -612-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -613-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -612-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1573-1, 60, -610-1);
+        								        b.setTypeId(0);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -608-1);
+        								        b.setTypeId(0);
+        								        
+        								        
+        								        b = getServer().getWorld("world").getBlockAt(-1574, 72, -645);
+        								        b.setTypeId(7);
+
+        								        b = getServer().getWorld("world").getBlockAt(-1574, 71, -645);
+        								        b.setTypeId(7);
+        								        
+        								        
+        								        b = getServer().getWorld("world").getBlockAt(-1575, 64, -640);
+        								        b.setTypeId(76);
+        								        
+        								        
             								   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
             	    							   public void run() {
@@ -151,25 +247,25 @@ public class SurvivalGames extends JavaPlugin {
     	} 
     	else if(cmd.getName().equalsIgnoreCase("spectate"))
     	{
-    		if(!started && (sender instanceof Player))
-    		{
-    			Player player = (Player) sender;
-    			player.setGameMode(GameMode.CREATIVE);
-    			if(spectators == null)
-    			{
-    				spectators = new LinkedList<String>();
-    			}
-    			spectators.add(player.getName());
-    			for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
-    			{
-    				Player plyr = getServer().getOnlinePlayers()[i];
-    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
-    				{
-    					plyr.hidePlayer(player);
-    				}
-    			}
-    		}
-    		else
+//    		if(false)
+//    		{
+//    			Player player = (Player) sender;
+//    			player.setGameMode(GameMode.CREATIVE);
+//    			if(spectators == null)
+//    			{
+//    				spectators = new LinkedList<String>();
+//    			}
+//    			spectators.add(player.getName());
+//    			for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
+//    			{
+//    				Player plyr = getServer().getOnlinePlayers()[i];
+//    				if(!plyr.getName().equalsIgnoreCase(player.getName()))
+//    				{
+//    					plyr.hidePlayer(player);
+//    				}
+//    			}
+//    		}
+    		//else
     		{
     			if(sender instanceof Player)
     			{
@@ -196,7 +292,6 @@ public class SurvivalGames extends JavaPlugin {
     			sender.sendMessage(ChatColor.RED + "You can't use that command now");
     			return true;
     		}
-    		return true;
     	}
     	return false; 
     }
