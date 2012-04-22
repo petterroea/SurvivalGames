@@ -13,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SurvivalGames extends JavaPlugin {
 	static LinkedList<String> spectators;
+	static LinkedList<String> dead;
     public void onEnable(){ 
     	getServer().broadcastMessage("SurvivalGames enabled");
     	final SurvivalGames me = this;
@@ -24,30 +25,31 @@ public class SurvivalGames extends JavaPlugin {
 			   }
 			}, 5L);
         
-        spectators = new LinkedList<String>();
+    	spectators = new LinkedList<String>();
+    	dead = new LinkedList<String>();
         Block b;
-        b = getServer().getWorld("world").getBlockAt(-1577, 60, -608);
+        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -607-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1579, 60, -609);
+        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -608-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1580, 60, -611);
+        b = getServer().getWorld("world").getBlockAt(-1579-1, 60, -610-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1579, 60, -613);
+        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -612-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1577, 60, -614);
+        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -613-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1575, 60, -613);
+        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -612-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1574, 60, -614);
+        b = getServer().getWorld("world").getBlockAt(-1573-1, 60, -610-1);
         b.setTypeId(7);
 
-        b = getServer().getWorld("world").getBlockAt(-1575, 60, -609);
+        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -608-1);
         b.setTypeId(7);
         
         
@@ -245,6 +247,17 @@ public class SurvivalGames extends JavaPlugin {
     		}
     		return true;
     	} 
+    	else if(cmd.getName().equalsIgnoreCase("alive"))
+    	{
+    		sender.sendMessage(ChatColor.GREEN + "Alive players: ");
+    		for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
+    		{
+    			if(!dead.contains(getServer().getOnlinePlayers()[i].getName()))
+    			{
+    				sender.sendMessage(ChatColor.YELLOW+"==="+ChatColor.GREEN+getServer().getOnlinePlayers()[i].getName()+ChatColor.YELLOW+"===");
+    			}
+    		}
+    	}
     	else if(cmd.getName().equalsIgnoreCase("spectate"))
     	{
 //    		if(false)

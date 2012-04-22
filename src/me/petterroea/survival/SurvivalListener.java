@@ -15,6 +15,9 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class SurvivalListener implements Listener{
 	static boolean open = true;
@@ -28,7 +31,9 @@ public class SurvivalListener implements Listener{
 	{
 		if(SurvivalGames.started && !event.getPlayer().isOp())
 		{
-			event.getPlayer().kickPlayer("A game is allready in action!");
+			event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1564, 71, -643));
+			event.getPlayer().sendMessage(ChatColor.RED + "The game has allready started. You are in the queue for next round");
+			SurvivalGames.dead.add(event.getPlayer().getName());
 //			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
 //			{
 //				event.getPlayer().setGameMode(GameMode.CREATIVE);
@@ -135,7 +140,7 @@ public class SurvivalListener implements Listener{
 	@EventHandler
 	public void damageEvent(EntityDamageEvent event)
 	{
-		if(event.getCause() == DamageCause.ENTITY_ATTACK && event.getEntity() instanceof Player && !SurvivalGames.canDamage)
+		if(event.getEntity() instanceof Player && !SurvivalGames.canDamage)
 		{
 			event.setCancelled(true);
 			Player player = (Player) event.getEntity();
@@ -144,7 +149,45 @@ public class SurvivalListener implements Listener{
 				//games.getServer().broadcastMessage("Death");
 			}
 		}
+		else if(event.getEntity() instanceof Player)
+		{
+			Player player = (Player)event.getEntity();
+			if(SurvivalGames.dead.contains(player.getName()))
+			{
+				event.setCancelled(true);
+			}
+		}
 		//games.getServer().broadcastMessage("Attack");
+	}
+	@EventHandler
+	public void playerRespawn(PlayerRespawnEvent event)
+	{
+		if(SurvivalGames.dead.contains(event.getPlayer().getName()))
+		{
+			SurvivalGames.dead.add(event.getPlayer().getName());
+		}
+		event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1564, 71, -643));
+	}
+	
+	@EventHandler
+	public void playerDisconnect(PlayerQuitEvent event)
+	{
+		
+	}
+	public void playerMove(PlayerMoveEvent event)
+	{
+		if(SurvivalGames.dead.contains(event.getPlayer().getName()))
+		{
+			if(event.getPlayer().getLocation().getBlockY() < 70)
+			{
+				event.setCancelled(true);
+				event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1564, 71, -643));
+			}
+		}
+		else if(!SurvivalGames.started)
+		{
+			event.setCancelled(true);
+		}
 	}
 	
 	@EventHandler
@@ -155,6 +198,7 @@ public class SurvivalListener implements Listener{
 		if(event.getEntity() instanceof Player)
 		{
 			Player player = (Player) event.getEntity();
+			SurvivalGames.dead.add(player.getName());
 //			player.setGameMode(GameMode.CREATIVE);
 //			if(SurvivalGames.spectators == null)
 //			{
@@ -169,34 +213,34 @@ public class SurvivalListener implements Listener{
 //					plyr.hidePlayer(player);
 //				}
 //			}
-//			int aliveplayers = 0;
-//			String lastName = "ANON";
-//			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
-//			{
-//				if(!games.getServer().getOnlinePlayers()[i].getName().equals(player.getName()))
-//				{
-//					if(!isSpectator(games.getServer().getOnlinePlayers()[i].getName()))
-//					{
-//						aliveplayers++;
-//						lastName = games.getServer().getOnlinePlayers()[i].getName();
-//					}
-//				}
-//			}
-//			if(aliveplayers == 1)
-//			{
-//				games.getServer().broadcastMessage(ChatColor.RED + lastName + " has won the game! The game will reset in 60 seconds...");
-//				games.getServer().getScheduler().scheduleSyncDelayedTask(games, new Runnable() {
-//
-//					   public void run() {
-//						   games.getServer().shutdown();
-//					   }
-//					}, 1200L);
-//			}
-			player.kickPlayer("You are dead!");
+			int aliveplayers = 0;
+			String lastName = "ANON";
+			for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+			{
+				if(!games.getServer().getOnlinePlayers()[i].getName().equals(player.getName()))
+				{
+					if(!isSpectator(games.getServer().getOnlinePlayers()[i].getName()))
+					{
+						aliveplayers++;
+						lastName = games.getServer().getOnlinePlayers()[i].getName();
+					}
+				}
+			}
+			if(aliveplayers == 1)
+			{
+				games.getServer().broadcastMessage(ChatColor.RED + lastName + " has won the game! The game will reset in 60 seconds...");
+				games.getServer().getScheduler().scheduleSyncDelayedTask(games, new Runnable() {
+
+					   public void run() {
+						   games.getServer().shutdown();
+					   }
+					}, 1200L);
+			}
+			//player.kickPlayer("You are dead!");
 		}
 	}
 	public boolean isSpectator(String name)
 	{
-		return SurvivalGames.spectators.contains(name);
+		return SurvivalGames.dead.contains(name);
 	}
 }
