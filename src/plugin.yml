@@ -8,12 +8,15 @@ commands:
     spectate:
         desc: 'Puts you in spectate mode. You have to do this before a game'
         usage: 'Usage: /spectate'
-    dontstart:
-        desc: 'Stops a game from starting'
-        usage: 'Usage: /dontstart'
     tpto:
         desc: 'Teleports a spectator to a player'
         usage: 'Usage: /tpto <PLAYER>'
     alive:
         desc: 'Tells you who is still alive'
         usage: '/alive'
+    sort:
+        desc: 'Sorts players'
+        usage: '/sort'
+    deathmatch:
+        desc: 'Starts deathmatch'
+        usage: '/deathmatch'

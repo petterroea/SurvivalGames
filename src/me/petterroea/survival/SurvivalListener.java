@@ -25,15 +25,24 @@ public class SurvivalListener implements Listener{
 	public SurvivalListener(SurvivalGames games)
 	{
 		this.games = games;
+		//games.getServer().getPluginManager().registerEvents(this, games);
 	}
 	@EventHandler
 	public void playerJoin(PlayerJoinEvent event)
 	{
-		if(SurvivalGames.started && !event.getPlayer().isOp())
+		if(SurvivalGames.started)
 		{
-			event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1564, 71, -643));
-			event.getPlayer().sendMessage(ChatColor.RED + "The game has allready started. You are in the queue for next round");
-			SurvivalGames.dead.add(event.getPlayer().getName());
+			final PlayerJoinEvent use = event;
+			games.getServer().getScheduler().scheduleAsyncDelayedTask(games, new Runnable(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					use.getPlayer().teleport(new Location(use.getPlayer().getWorld(), -1573, 71, -643));
+					use.getPlayer().sendMessage(ChatColor.RED + "The game has allready started. You are in the queue for next round");
+					SurvivalGames.dead.add(use.getPlayer().getName());
+				}}, 20L);
+			
 //			if(SurvivalGames.spectators.contains(event.getPlayer().getName()))
 //			{
 //				event.getPlayer().setGameMode(GameMode.CREATIVE);
@@ -174,19 +183,20 @@ public class SurvivalListener implements Listener{
 	{
 		
 	}
+	
+	@EventHandler
 	public void playerMove(PlayerMoveEvent event)
 	{
 		if(SurvivalGames.dead.contains(event.getPlayer().getName()))
 		{
 			if(event.getPlayer().getLocation().getBlockY() < 70)
 			{
-				event.setCancelled(true);
-				event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1564, 71, -643));
+				event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), -1573, 71, -643));
 			}
 		}
-		else if(!SurvivalGames.started)
+		else if(!SurvivalGames.init)
 		{
-			event.setCancelled(true);
+			//event.setCancelled(true);
 		}
 	}
 	
@@ -199,6 +209,7 @@ public class SurvivalListener implements Listener{
 		{
 			Player player = (Player) event.getEntity();
 			SurvivalGames.dead.add(player.getName());
+			games.getServer().broadcastMessage(ChatColor.RED + player.getName() + " died!");
 //			player.setGameMode(GameMode.CREATIVE);
 //			if(SurvivalGames.spectators == null)
 //			{
@@ -235,6 +246,20 @@ public class SurvivalListener implements Listener{
 						   games.getServer().shutdown();
 					   }
 					}, 1200L);
+			}
+			else if(aliveplayers==2)
+			{
+				for(int i = 0; i < games.getServer().getOnlinePlayers().length; i++)
+		    		{
+		    			if(!games.dead.contains(games.getServer().getOnlinePlayers()[i].getName()))
+		    			{
+		    				double sinex = Math.sin(i*20)*20;
+		    				double cosy = Math.cos(i*20)*20;
+		    				Location l = new Location(games.getServer().getOnlinePlayers()[i].getWorld(), -1576+sinex, 65, -610+cosy);
+		    				games.getServer().getOnlinePlayers()[i].teleport(l);
+		    			}
+		    		}
+				games.getServer().broadcastMessage(ChatColor.RED + "DEATHMATCH BECAUSE OF FEW PLAYERS");
 			}
 			//player.kickPlayer("You are dead!");
 		}
