@@ -1,5 +1,6 @@
 package me.petterroea.survival;
 
+
 import java.util.LinkedList;
 
 import org.bukkit.ChatColor;
@@ -103,47 +104,6 @@ public class SurvivalListener implements Listener{
 		else
 		{
 			event.getPlayer().kickPlayer("The server is not open now. Please come back later");
-		}
-	}
-	@EventHandler
-	public void blockPlace(BlockPlaceEvent event)
-	{
-		if(isSpectator(event.getPlayer().getName()))
-		{
-			event.setCancelled(true);
-			Player player = event.getPlayer();
-			player.sendMessage(ChatColor.RED + "Spectators cannot place bocks");
-		}
-	}
-	@EventHandler
-	public void bucket(PlayerBucketEvent event)
-	{
-		if(isSpectator(event.getPlayer().getName()))
-		{
-			event.setCancelled(true);
-		}
-	}
-	@EventHandler
-	public void blockBreak(BlockBreakEvent event)
-	{
-		if(isSpectator(event.getPlayer().getName()))
-		{
-			event.setCancelled(true);
-			Player player = event.getPlayer();
-			player.sendMessage(ChatColor.RED + "Spectators cannot break bocks");
-			return;
-		}
-		else
-		{
-			if(event.getBlock().getTypeId() == 18 || event.getBlock().getTypeId() == 39 || event.getBlock().getTypeId() == 40)
-			{
-				
-			}
-			else
-			{
-				event.getPlayer().sendMessage(ChatColor.RED + "You cant break this block!");
-				event.setCancelled(true);
-			}
 		}
 	}
 	@EventHandler

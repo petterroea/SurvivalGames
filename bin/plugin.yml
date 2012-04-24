@@ -1,5 +1,5 @@
 name: SurvivalGames
-main: me.petterroea.survival.SurvivalGames
+main: me.petterroea.newsurvival.Survival
 version: 0.01
 commands:
     start:
@@ -20,3 +20,6 @@ commands:
     deathmatch:
         desc: 'Starts deathmatch'
         usage: '/deathmatch'
+    revive:
+        desc: 'Revives'
+        usage: '/revive <player>'

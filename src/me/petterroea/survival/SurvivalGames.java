@@ -137,130 +137,130 @@ public class SurvivalGames extends JavaPlugin {
     				final SurvivalGames me = this;
     				getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 
-    					   public void run() {
-    						   if(init)
-    						   {
-    							   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+ 					   public void run() {
+ 						   if(init)
+ 						   {
+ 							   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-        							   public void run() {
-        								   if(init)
-        								   {
-            								  getServer().broadcastMessage(ChatColor.RED + "The game has started!");
-            								 started = true;
-        									   Block b;
-        								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -607-1);
-        								        b.setTypeId(0);
+     							   public void run() {
+     								   if(init)
+     								   {
+         								  getServer().broadcastMessage(ChatColor.RED + "The game has started!");
+         								 started = true;
+     									   Block b;
+     								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -607-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -608-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -608-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1579-1, 60, -610-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1579-1, 60, -610-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -612-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1578-1, 60, -612-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -613-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1576-1, 60, -613-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -612-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -612-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1573-1, 60, -610-1);
-        								        b.setTypeId(0);
+     								        b = getServer().getWorld("world").getBlockAt(-1573-1, 60, -610-1);
+     								        b.setTypeId(0);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -608-1);
-        								        b.setTypeId(0);
-        								        
-        								        
-        								        b = getServer().getWorld("world").getBlockAt(-1574, 72, -645);
-        								        b.setTypeId(7);
+     								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -608-1);
+     								        b.setTypeId(0);
+     								        
+     								        
+     								        b = getServer().getWorld("world").getBlockAt(-1574, 72, -645);
+     								        b.setTypeId(7);
 
-        								        b = getServer().getWorld("world").getBlockAt(-1574, 71, -645);
-        								        b.setTypeId(7);
-        								        
-        								        
-        								        b = getServer().getWorld("world").getBlockAt(-1575, 64, -640);
-        								        b.setTypeId(76);
-        								        
-        								        
-        								        getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+     								        b = getServer().getWorld("world").getBlockAt(-1574, 71, -645);
+     								        b.setTypeId(7);
+     								        
+     								        
+     								        b = getServer().getWorld("world").getBlockAt(-1575, 64, -640);
+     								        b.setTypeId(76);
+     								        
+     								        
+     								        getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-             	    							   public void run() {
-             	    							       getServer().broadcastMessage(ChatColor.BLACK + "You may now kill.");
-             	    							       canDamage = true;
-             	    							   }
-             	    							}, 800L);
-        								        
-        								        getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+          	    							   public void run() {
+          	    							       getServer().broadcastMessage(ChatColor.BLACK + "You may now kill.");
+          	    							       canDamage = true;
+          	    							   }
+          	    							}, 800L);
+     								        
+     								        getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-             	    							   public void run() {
-             	    								  for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
-             	    						    		{
-             	    						    			if(!dead.contains(getServer().getOnlinePlayers()[i].getName()))
-             	    						    			{
-             	    						    				double sinex = Math.sin(i*20)*20;
-             	    						    				double cosy = Math.cos(i*20)*20;
-             	    						    				Location l = new Location(getServer().getOnlinePlayers()[i].getWorld(), -1576+sinex, 65, -610+cosy);
-             	    						    				getServer().getOnlinePlayers()[i].teleport(l);
-             	    						    			}
-             	    						    		}
-             	    								  getServer().broadcastMessage(ChatColor.RED + "DEATHMATCH");
-             	    								  
-             	    								 getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+          	    							   public void run() {
+          	    								  for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
+          	    						    		{
+          	    						    			if(!dead.contains(getServer().getOnlinePlayers()[i].getName()))
+          	    						    			{
+          	    						    				double sinex = Math.sin(i*20)*20;
+          	    						    				double cosy = Math.cos(i*20)*20;
+          	    						    				Location l = new Location(getServer().getOnlinePlayers()[i].getWorld(), -1576+sinex, 65, -610+cosy);
+          	    						    				getServer().getOnlinePlayers()[i].teleport(l);
+          	    						    			}
+          	    						    		}
+          	    								  getServer().broadcastMessage(ChatColor.RED + "DEATHMATCH");
+          	    								  
+          	    								 getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-                   	    							   public void run() {
-                   	    								  for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
-                   	    						    		{
-                   	    						    			if(!dead.contains(getServer().getOnlinePlayers()[i].getName()))
-                   	    						    			{
-                   	    						    				double sinex = Math.sin(i*20)*20;
-                   	    						    				double cosy = Math.cos(i*20)*20;
-                   	    						    				Location l = new Location(getServer().getOnlinePlayers()[i].getWorld(), -1576+sinex, 65, -610+cosy);
-                   	    						    				getServer().getOnlinePlayers()[i].teleport(l);
-                   	    						    			}
-                   	    						    		}
-                   	    								  getServer().broadcastMessage(ChatColor.RED + "DEATHMATCH");
-                   	    							   }
-                   	    							}, 800L);
-             	    							   }
-             	    							}, 20*60*20L);
-        								   }
-        							   }
-        							}, 100L);
-        						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+                	    							   public void run() {
+                	    								  for(int i = 0; i < getServer().getOnlinePlayers().length; i++)
+                	    						    		{
+                	    						    			if(!dead.contains(getServer().getOnlinePlayers()[i].getName()))
+                	    						    			{
+                	    						    				double sinex = Math.sin(i*20)*20;
+                	    						    				double cosy = Math.cos(i*20)*20;
+                	    						    				Location l = new Location(getServer().getOnlinePlayers()[i].getWorld(), -1576+sinex, 65, -610+cosy);
+                	    						    				getServer().getOnlinePlayers()[i].teleport(l);
+                	    						    			}
+                	    						    		}
+                	    								  getServer().broadcastMessage(ChatColor.RED + "DEATHMATCH");
+                	    							   }
+                	    							}, 800L);
+          	    							   }
+          	    							}, 20*60*20L);
+     								   }
+     							   }
+     							}, 100L);
+     						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-        							   public void run() {
-        								   if(init)
-        							       getServer().broadcastMessage(ChatColor.RED + "1 second");
-        							   }
-        							}, 80L);
-        						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+     							   public void run() {
+     								   if(init)
+     							       getServer().broadcastMessage(ChatColor.RED + "1 second");
+     							   }
+     							}, 80L);
+     						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-        							   public void run() {
-        								   if(init)
-        							       getServer().broadcastMessage(ChatColor.RED + "2 seconds");
-        							   }
-        							}, 60L);
-        						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+     							   public void run() {
+     								   if(init)
+     							       getServer().broadcastMessage(ChatColor.RED + "2 seconds");
+     							   }
+     							}, 60L);
+     						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-        							   public void run() {
-        								   if(init)
-        							       getServer().broadcastMessage(ChatColor.RED + "3 seconds");
-        							   }
-        							}, 40L);
-        						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
+     							   public void run() {
+     								   if(init)
+     							       getServer().broadcastMessage(ChatColor.RED + "3 seconds");
+     							   }
+     							}, 40L);
+     						   getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
-        							   public void run() {
-        								   if(init)
-        							       getServer().broadcastMessage(ChatColor.RED + "4 seconds");
-        							   }
-        							}, 20L);
-        					   }
-    						   
-    					   }
-    						   
-    					}, 1100L);
+     							   public void run() {
+     								   if(init)
+     							       getServer().broadcastMessage(ChatColor.RED + "4 seconds");
+     							   }
+     							}, 20L);
+     					   }
+ 						   
+ 					   }
+ 						   
+ 					}, 1100L);
     			}
     		}
     		else
