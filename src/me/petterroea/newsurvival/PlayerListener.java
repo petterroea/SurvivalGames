@@ -1,7 +1,5 @@
 package me.petterroea.newsurvival;
 
-import me.petterroea.survival.SurvivalGames;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -9,18 +7,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerListener implements Listener {
 	Survival games;
@@ -33,11 +26,11 @@ public class PlayerListener implements Listener {
 	{
 		if(event.getMessage().contains("get in a hole")||event.getMessage().contains("find a hole")||event.getMessage().contains("its so big"))
 		{
-			event.getPlayer().sendMessage(ChatColor.BLUE+"THATS WHAT SHE SAID^^");
+			event.getPlayer().sendMessage(ChatColor.BLUE+"THAT'S WHAT SHE SAID^^");
 		}
 		else if(event.getMessage().contains("gay"))
 		{
-			event.getPlayer().sendMessage(ChatColor.BLUE+"No, youre gay!");
+			event.getPlayer().sendMessage(ChatColor.BLUE+"No, you're gay!");
 		}
 		else if(event.getMessage().contains("fuck"))
 		{
@@ -65,6 +58,14 @@ public class PlayerListener implements Listener {
 			event.getPlayer().sendMessage("     .=+HM######M+/+HM@+=.");
 			event.getPlayer().sendMessage("         ,:/%XM####H/.");
 			event.getPlayer().sendMessage("              ,.:=-.");
+		}
+		else if(event.getMessage().contains("your mother is a lie"))
+		{
+			event.getPlayer().sendMessage("no u");
+		}
+		else if(event.getMessage().contains("WHO DA FUQ MADE THIS PLUGIN"))
+		{
+			event.getPlayer().sendMessage("Petterroea, some contributions by I_am_not_funny");
 		}
 	}
 	@EventHandler
@@ -164,7 +165,7 @@ public class PlayerListener implements Listener {
 	{
 		event.setJoinMessage("");
 			event.setJoinMessage(event.getPlayer().getName() + " has joined!");
-			event.getPlayer().sendMessage(ChatColor.RED+"Type /start to start a game if a game is not allready started");
+			event.getPlayer().sendMessage(ChatColor.RED+"Type /start to start a game if a game is not already started");
 			event.getPlayer().sendMessage(ChatColor.RED+"You cannot kill before 2 minutes after start");
 			event.getPlayer().sendMessage(ChatColor.RED+"Please find a pod IMMEDIATELY");
 		if(games.started)
