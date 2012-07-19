@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerBucketEvent;
 
 public class BlockListener implements Listener {
 	Survival games;
@@ -28,7 +27,7 @@ public class BlockListener implements Listener {
 		{
 			event.setCancelled(true);
 			Player player = event.getPlayer();
-			player.sendMessage(ChatColor.RED + "Dead people cannot break bocks");
+			player.sendMessage(ChatColor.RED + "Dead people can't break blocks");
 		}
 		else
 		{
@@ -38,7 +37,7 @@ public class BlockListener implements Listener {
 			}
 			else
 			{
-				event.getPlayer().sendMessage(ChatColor.RED + "You cant break this block!");
+				event.getPlayer().sendMessage(ChatColor.RED + "You can't break this block!");
 				event.setCancelled(true);
 			}
 		}

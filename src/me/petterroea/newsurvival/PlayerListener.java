@@ -165,8 +165,8 @@ public class PlayerListener implements Listener {
 	{
 		event.setJoinMessage("");
 			event.setJoinMessage(event.getPlayer().getName() + " has joined!");
-			event.getPlayer().sendMessage(ChatColor.RED+"Type /start to start a game if a game is not already started");
-			event.getPlayer().sendMessage(ChatColor.RED+"You cannot kill before 2 minutes after start");
+			event.getPlayer().sendMessage(ChatColor.RED+"Type /start to start a game if a game is not already running");
+			event.getPlayer().sendMessage(ChatColor.RED+"You can't kill other players within the first 2 minutes of the game");
 			event.getPlayer().sendMessage(ChatColor.RED+"Please find a pod IMMEDIATELY");
 		if(games.started)
 		{

@@ -17,6 +17,7 @@ public class Survival extends JavaPlugin{
 	public boolean started = false;
 	public boolean init = false;
 	public boolean canDamage = false;
+	
 	@Override
 	public void onEnable()
 	{
@@ -56,17 +57,11 @@ public class Survival extends JavaPlugin{
         b = getServer().getWorld("world").getBlockAt(-1574, 60, -646);
         b.setTypeId(7);
         
-        
-        
-        
-        
 //        b = this.getServer().getWorld("world").getBlockAt(-1571, 66, -645);
 //        b.setTypeId(7);
 //
 //        b = this.getServer().getWorld("world").getBlockAt(-1572, 66, -645);
 //        b.setTypeId(7);
-        
-        
         
         b = this.getServer().getWorld("world").getBlockAt(-1574, 72, -645);
         b.setTypeId(0);
@@ -74,24 +69,25 @@ public class Survival extends JavaPlugin{
         b = this.getServer().getWorld("world").getBlockAt(-1574, 71, -645);
         b.setTypeId(0);
         
-        
-        
         b = this.getServer().getWorld("world").getBlockAt(-1574, 71, -645);
         b.setTypeId(0);
         getServer().getPluginManager().registerEvents(playerListener, this);
+        
         try{
-        	
         	getServer().getPluginManager().registerEvents(blockListener, this);
-        } catch(Exception e)
+        } 
+        catch(Exception e)
         {
         	getServer().broadcastMessage(e.getMessage());
         }
 	}
+	
 	@Override
 	public void onDisable()
 	{
 		
 	}
+	
 	@Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if(cmd.getName().equalsIgnoreCase("tpto"))
@@ -172,17 +168,14 @@ public class Survival extends JavaPlugin{
  								        b = getServer().getWorld("world").getBlockAt(-1574-1, 60, -608-1);
  								        b.setTypeId(0);
  								        
- 								        
  								        b = getServer().getWorld("world").getBlockAt(-1574, 72, -645);
  								        b.setTypeId(7);
 
  								        b = getServer().getWorld("world").getBlockAt(-1574, 71, -645);
  								        b.setTypeId(7);
  								        
- 								        
  								        b = getServer().getWorld("world").getBlockAt(-1575, 64, -640);
  								        b.setTypeId(76);
- 								        
  								        
  								        getServer().getScheduler().scheduleSyncDelayedTask(me, new Runnable() {
 
@@ -309,6 +302,6 @@ public class Survival extends JavaPlugin{
 			}
 			return true;
 		}
-		return false;
+		return true;
 	}
 }

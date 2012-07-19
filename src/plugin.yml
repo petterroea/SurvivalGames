@@ -1,6 +1,7 @@
 name: SurvivalGames
 main: me.petterroea.newsurvival.Survival
 version: 0.01
+authors: ['Petterroea', 'I_am_not_funny']
 commands:
     start:
         desc: 'Starts the game! You need at least 2 players to do this'
